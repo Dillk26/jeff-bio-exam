@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 3: Organic Molecules — Jeff's Study Tests</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: white; color: black; }
+    }
+    .option-card { transition: all 0.15s ease-in-out; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans pb-16">
+
+  <!-- Header -->
+  <header class="bg-indigo-900 text-white shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <span class="inline-block bg-indigo-700 text-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider mb-2">9th Grade Biology • Unit 3 Review</span>
+        <h1 class="text-2xl md:text-3xl font-bold">Organic Molecules Practice Tests</h1>
+        <p class="text-indigo-200 text-sm mt-1">3 complete 9th-grade test variations — every question is directly mapped to an "I can..." statement from Jeff's study guide with randomized answer keys.</p>
+      </div>
+      <div class="flex items-center gap-2 no-print">
+        <button onclick="window.print()" class="bg-indigo-800 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-lg border border-indigo-600 transition flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          Print Current Test
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 mt-6">
+
+    <!-- Test Variation Selector Tabs -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-2 mb-6 flex flex-wrap gap-2 no-print" id="tabs-container">
+      <button onclick="switchTest(0)" id="tab-0" class="flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow">
+        <span>Test Variation A</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-800 text-indigo-100" id="badge-0">20 Qs</span>
+      </button>
+      <button onclick="switchTest(1)" id="tab-1" class="flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        <span>Test Variation B</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700" id="badge-1">20 Qs</span>
+      </button>
+      <button onclick="switchTest(2)" id="tab-2" class="flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        <span>Test Variation C</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700" id="badge-2">20 Qs</span>
+      </button>
+      <button onclick="switchTest(3)" id="tab-3" class="py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-emerald-700 hover:bg-emerald-50 border border-emerald-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>Quick Study Cheat-Sheet</span>
+      </button>
+    </div>
+
+    <!-- Score & Controls Bar -->
+    <div id="test-controls" class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-wrap items-center justify-between gap-4 no-print">
+      <div class="flex items-center gap-4">
+        <div>
+          <h2 id="current-test-title" class="font-bold text-lg text-slate-800">Test Variation A: Core Foundations & Structures</h2>
+          <p id="current-test-subtitle" class="text-xs text-slate-500">Select an answer for each question. You can grade the test at any time or enable Instant Feedback.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <label class="inline-flex items-center cursor-pointer select-none text-sm text-slate-700 bg-slate-100 px-3 py-2 rounded-lg border border-slate-200">
+          <input type="checkbox" id="instant-feedback-toggle" class="sr-only peer" onchange="toggleInstantFeedback()">
+          <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all relative peer-checked:bg-indigo-600 mr-2"></div>
+          <span>Instant Check Mode</span>
+        </label>
+
+        <button onclick="gradeCurrentTest()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-4 py-2 rounded-lg shadow-sm transition">
+          Submit & Grade Test
+        </button>
+        <button onclick="resetCurrentTest()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm px-3 py-2 rounded-lg border border-slate-300 transition">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- Score Banner (Hidden until graded) -->
+    <div id="score-banner" class="hidden rounded-xl p-5 mb-6 border shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 id="score-heading" class="text-xl font-bold"></h3>
+          <p id="score-message" class="text-sm mt-1"></p>
+        </div>
+        <div class="text-right">
+          <span id="score-percentage" class="text-3xl font-extrabold"></span>
+          <span id="score-fraction" class="block text-xs uppercase tracking-wider font-semibold opacity-75"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions Container -->
+    <div id="questions-container" class="space-y-6"></div>
+
+    <!-- Bottom Submit Bar -->
+    <div id="bottom-submit-bar" class="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex items-center justify-between no-print">
+      <span id="progress-text" class="text-sm font-medium text-slate-600">0 of 20 questions answered</span>
+      <div class="flex gap-3">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-600 hover:text-slate-900 text-sm font-medium px-3 py-2">Back to Top ↑</button>
+        <button onclick="gradeCurrentTest()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-2.5 rounded-lg shadow transition">
+          Grade My Test
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Study Cheat Sheet View (Tab 3) -->
+    <div id="cheat-sheet-container" class="hidden space-y-6">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h2 class="text-2xl font-bold text-indigo-900 mb-2">Unit 3 Master Study Guide & Diagram Reference</h2>
+        <p class="text-sm text-slate-600 mb-6">Everything checked off from Jeff's learning targets in one organized reference sheet.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- General Organic Molecules -->
+          <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+            <h3 class="font-bold text-indigo-800 text-base border-b border-slate-200 pb-2 mb-3">1. General Organic Molecules & Carbon</h3>
+            <ul class="text-sm space-y-2 text-slate-700">
+              <li><strong>Organic Definition:</strong> Contains both <strong>Carbon (C)</strong> and <strong>Hydrogen (H)</strong> bonded together. (Note: CO₂ and H₂O are <em>inorganic</em> because they don't have both C and H!).</li>
+              <li><strong>Carbon's Atomic Stats (Atomic #6, Mass 12):</strong>
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Protons:</strong> 6 | <strong>Neutrons:</strong> 6 | <strong>Total Electrons:</strong> 6</li>
+                  <li><strong>Valence Electrons:</strong> 4 (in outer shell) → forms <strong>4 covalent bonds</strong> to reach a stable octet (8).</li>
+                  <li>Can form single, double, or triple bonds and long chains, branched chains, or rings.</li>
+                </ul>
+              </li>
+              <li><strong>Dehydration Synthesis:</strong> Builds polymers from monomers by <strong>removing H₂O</strong> (forms covalent bonds).</li>
+              <li><strong>Hydrolysis:</strong> Breaks down polymers into monomers by <strong>adding H₂O</strong> (breaks covalent bonds, e.g., digestion).</li>
+            </ul>
+          </div>
+
+          <!-- Carbohydrates -->
+          <div class="bg-amber-50/60 rounded-lg p-4 border border-amber-200">
+            <h3 class="font-bold text-amber-900 text-base border-b border-amber-200 pb-2 mb-3">2. Carbohydrates</h3>
+            <ul class="text-sm space-y-2 text-slate-700">
+              <li><strong>Elements & Ratio:</strong> Carbon, Hydrogen, Oxygen (C, H, O) in a strict <strong>1 : 2 : 1 ratio</strong> (e.g., Glucose is C₆H₁₂O₆).</li>
+              <li><strong>Shape & Suffix:</strong> Hexagonal/pentagonal carbon rings. Sugars end in <strong>-ose</strong> (glucose, fructose, sucrose, lactose, maltose).</li>
+              <li><strong>Monomer:</strong> Monosaccharide | <strong>Polymer:</strong> Polysaccharide.</li>
+              <li><strong>4 Key Polysaccharides:</strong>
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Starch:</strong> Energy storage in <em>plants</em>.</li>
+                  <li><strong>Glycogen:</strong> Short-term energy storage in <em>animals</em> (stored in liver & muscles).</li>
+                  <li><strong>Cellulose:</strong> Structural support in <em>plant cell walls</em> (fiber).</li>
+                  <li><strong>Chitin:</strong> Structural support in <em>fungi cell walls</em> & <em>arthropod exoskeletons</em>.</li>
+                </ul>
+              </li>
+              <li><strong>Photosynthesis vs. Cellular Respiration:</strong> Photosynthesis builds Glucose + O₂; Cellular Respiration breaks down Glucose + O₂ → CO₂ + H₂O + ATP.</li>
+            </ul>
+          </div>
+
+          <!-- Lipids -->
+          <div class="bg-sky-50/60 rounded-lg p-4 border border-sky-200">
+            <h3 class="font-bold text-sky-900 text-base border-b border-sky-200 pb-2 mb-3">3. Lipids (Fats, Oils, Waxes, Steroids)</h3>
+            <ul class="text-sm space-y-2 text-slate-700">
+              <li><strong>Elements & Polarity:</strong> Mostly C and H with very little O. <strong>Nonpolar</strong> and <strong>hydrophobic</strong> (water-fearing / does not dissolve in water).</li>
+              <li><strong>Two Building Blocks (Monomers):</strong> <strong>1 Glycerol</strong> + <strong>3 Fatty Acids</strong> (forms a triglyceride via dehydration synthesis).</li>
+              <li><strong>Types & Functions:</strong>
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Triglycerides:</strong> Long-term energy storage, insulation, cushioning organs.</li>
+                  <li><strong>Phospholipids:</strong> Make up cell membranes (polar hydrophilic head + nonpolar hydrophobic tails).</li>
+                  <li><strong>Cholesterol / Steroids:</strong> Ring-shaped lipids; help cell membranes & act as hormones.</li>
+                </ul>
+              </li>
+              <li><strong>Study Guide Picture:</strong>
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Straight chain (All single C–C bonds):</strong> <strong>Saturated fatty acid</strong>, packed full of H, <strong>solid</strong> at room temp (butter/animal fat). Linked to <strong>atherosclerosis / arteriosclerosis</strong> (clogged arteries).</li>
+                  <li><strong>Bent chain (Has a C=C double bond):</strong> <strong>Unsaturated fatty acid</strong>, comes from a <strong>plant</strong>, and is <strong>liquid</strong> at room temp (plant oils).</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Nucleic Acids & Proteins -->
+          <div class="bg-emerald-50/60 rounded-lg p-4 border border-emerald-200">
+            <h3 class="font-bold text-emerald-900 text-base border-b border-emerald-200 pb-2 mb-3">4. Nucleic Acids & 5. Proteins</h3>
+            <ul class="text-sm space-y-2 text-slate-700">
+              <li><strong>Nucleic Acids (C, H, O, N, P):</strong> Store & transmit genetic info (DNA & RNA).
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Monomer:</strong> Nucleotide = <strong>Phosphate group</strong> + <strong>5-carbon Sugar</strong> + <strong>Nitrogenous Base</strong>.</li>
+                  <li><strong>Chargaff's Rules:</strong> A bonds with T (U in RNA); C bonds with G.</li>
+                  <li><strong>Gene:</strong> A specific segment of DNA that codes for a protein.</li>
+                </ul>
+              </li>
+              <li><strong>Proteins (C, H, O, N):</strong>
+                <ul class="list-disc list-inside ml-2 mt-1 text-xs space-y-1 text-slate-600">
+                  <li><strong>Monomer:</strong> Amino Acid (<strong>20</strong> different types) → <strong>Polypeptide</strong> → <strong>Protein</strong>.</li>
+                  <li><strong>Sickle Cell Disease:</strong> A single amino acid mutation changes hemoglobin's 3D shape, causing red blood cells to sickle.</li>
+                  <li><strong>Enzymes (end in -ase):</strong> Biological catalysts that speed up reactions by lowering activation energy. <em>Lock-and-Key</em> fit between <strong>Active Site</strong> and <strong>Substrate</strong>.</li>
+                  <li><strong>Catalase (Liver Lab):</strong> Breaks down toxic hydrogen peroxide (H₂O₂) into water (H₂O) and oxygen gas (O₂).</li>
+                  <li><strong>Amylase:</strong> Enzyme in saliva that breaks down starch into simple sugars.</li>
+                  <li><strong>Denaturation:</strong> Extreme heat or pH changes the 3D shape of the active site so the substrate can no longer bind.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const diagramHtml = {
+      fattyAcids: `
+        <div class="my-3 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Study Guide Reference Picture: Two Fatty Acids</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+            <div class="bg-white p-3 rounded border border-slate-200">
+              <span class="font-sans font-bold text-indigo-700 block mb-1">Picture 1 (Straight Chain):</span>
+              HO-C(=O)-C-C-C-C-C-C-C-C-C-H<br>
+              <span class="font-sans text-slate-600 text-xs">(All single C–C bonds, completely straight chain full of H's)</span>
+            </div>
+            <div class="bg-white p-3 rounded border border-slate-200">
+              <span class="font-sans font-bold text-amber-700 block mb-1">Picture 2 (Bent Chain):</span>
+              HO-C(=O)-C-C-C-C-C=C-C-C-C-H<br>
+              <span class="font-sans text-slate-600 text-xs">(Contains a C=C double bond that makes the chain bend/kink)</span>
+            </div>
+          </div>
+        </div>
+      `,
+      nucleotides: `
+        <div class="my-3 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Study Guide Reference Picture: 4 Nucleotides</p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <div class="bg-white px-3 py-2 rounded border border-slate-200 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">P</span>
+              <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 rounded font-bold">S</span>
+              <span class="px-2 py-0.5 bg-emerald-500 text-white rounded font-bold">A (adenine)</span>
+            </div>
+            <div class="bg-white px-3 py-2 rounded border border-slate-200 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">P</span>
+              <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 rounded font-bold">S</span>
+              <span class="px-2 py-0.5 bg-pink-500 text-white rounded font-bold">T (thymine)</span>
+            </div>
+            <div class="bg-white px-3 py-2 rounded border border-slate-200 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">P</span>
+              <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 rounded font-bold">S</span>
+              <span class="px-2 py-0.5 bg-blue-600 text-white rounded font-bold">C (cytosine)</span>
+            </div>
+            <div class="bg-white px-3 py-2 rounded border border-slate-200 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold">P</span>
+              <span class="px-2 py-0.5 bg-sky-100 border border-sky-300 rounded font-bold">S</span>
+              <span class="px-2 py-0.5 bg-red-500 text-white rounded font-bold">G (guanine)</span>
+            </div>
+          </div>
+        </div>
+      `,
+      enzyme: `
+        <div class="my-3 p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-700">
+          <p class="font-semibold text-slate-500 uppercase tracking-wider mb-1">Study Guide Reference Picture: Enzyme Action</p>
+          <div class="flex flex-wrap items-center gap-2 font-medium">
+            <span class="bg-white px-2.5 py-1 rounded border border-slate-200">1. Substrate enters active site</span>
+            <span>→</span>
+            <span class="bg-white px-2.5 py-1 rounded border border-slate-200">2. Enzyme/substrate complex</span>
+            <span>→</span>
+            <span class="bg-white px-2.5 py-1 rounded border border-slate-200">3. Enzyme/products complex</span>
+            <span>→</span>
+            <span class="bg-white px-2.5 py-1 rounded border border-slate-200">4. Products leave enzyme</span>
+          </div>
+        </div>
+      `
+    };
+
+    const testsData = [
+      {
+        id: "A",
+        title: "Test Variation A: Core 9th-Grade Study Guide Targets",
+        subtitle: "20 multiple-choice questions with randomized answer keys. Every question shows the exact 'I can...' bullet point from your study guide.",
+        questions: [
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain what it means when a molecule is classified as ORGANIC.",
+            q: "In biology class, what makes a molecule an ORGANIC molecule?",
+            options: [
+              "It is any molecule that is a liquid at room temperature, such as water (H₂O)",
+              "It contains both carbon (C) and hydrogen (H) bonded together",
+              "It is any gas breathed out by animals, such as carbon dioxide (CO₂)",
+              "It only contains oxygen (O) and nitrogen (N) atoms"
+            ],
+            correct: 1,
+            explanation: "To be classified as organic, a molecule must contain carbon (C) and hydrogen (H) bonded together."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can recall all 4 categories of organic molecules & recall all 4 organic polymers and their corresponding monomers.",
+            q: "Which list correctly matches all 4 categories of organic molecules (polymers) with their building blocks (monomers)?",
+            options: [
+              "Carbohydrates: amino acids | Lipids: monosaccharides | Nucleic Acids: fatty acids | Proteins: nucleotides",
+              "Carbohydrates: nucleotides | Lipids: amino acids | Nucleic Acids: glycerol | Proteins: monosaccharides",
+              "Carbohydrates: monosaccharides | Lipids: glycerol & fatty acids | Nucleic Acids: nucleotides | Proteins: amino acids",
+              "Carbohydrates: fatty acids | Lipids: nucleotides | Nucleic Acids: monosaccharides | Proteins: glycerol"
+            ],
+            correct: 2,
+            explanation: "Carbohydrates = monosaccharides, Lipids = glycerol + fatty acids, Nucleic acids = nucleotides, Proteins = amino acids."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can recall what elements make up the 4 different organic molecules.",
+            q: "Which elements make up each of the 4 categories of organic molecules?",
+            options: [
+              "Carbohydrates: C, H, N | Lipids: C, H, P | Proteins: C, H, O | Nucleic Acids: C, H",
+              "Carbohydrates: C, H, O | Lipids: C, H, O | Proteins: C, H, O, N | Nucleic Acids: C, H, O, N, P",
+              "Carbohydrates: C, O | Lipids: H, O | Proteins: C, H, O | Nucleic Acids: C, H, O, N",
+              "All 4 organic molecules are made of only Carbon (C) and Hydrogen (H)"
+            ],
+            correct: 1,
+            explanation: "Memory trick: CHO, CHO, CHON, CHONP for Carbs, Lipids, Proteins, Nucleic Acids."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can: Carbon has an atomic number of 6 and an atomic mass of 12. How many protons, electrons, neutrons, and valence electrons does C have? How many times will C bond to become stable?",
+            q: "Carbon has an atomic number of 6 and an atomic mass of 12. How many protons, neutrons, total electrons, and valence electrons does carbon have, and how many covalent bonds will it form to become stable?",
+            options: [
+              "6 protons, 12 neutrons, 6 electrons, 2 valence electrons — forms 2 bonds",
+              "6 protons, 6 neutrons, 6 electrons, 4 valence electrons — forms 4 bonds",
+              "12 protons, 6 neutrons, 12 electrons, 6 valence electrons — forms 6 bonds",
+              "6 protons, 6 neutrons, 4 electrons, 8 valence electrons — forms 0 bonds"
+            ],
+            correct: 1,
+            explanation: "6 protons, 6 neutrons, 6 total electrons, with 4 valence electrons requiring 4 bonds."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can compare and contrast dehydration synthesis and hydrolysis & explain the importance of WATER in both.",
+            q: "How does the role of WATER differ between dehydration synthesis and hydrolysis?",
+            options: [
+              "Dehydration synthesis adds water to break molecules apart, while hydrolysis removes water to build polymers",
+              "Both processes remove water to break down food in the stomach",
+              "Dehydration synthesis removes a water molecule to bond monomers together, while hydrolysis adds a water molecule to break a polymer apart",
+              "Water is not used or produced in either dehydration synthesis or hydrolysis"
+            ],
+            correct: 2,
+            explanation: "Dehydration removes H₂O to build bonds; hydrolysis adds H₂O to break bonds."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can identify sugars as having the suffix -ose & list the elements from which carbohydrates are made (calculate the ratio).",
+            q: "Which of the following molecules has the correct sugar suffix AND the correct 1:2:1 ratio of Carbon : Hydrogen : Oxygen for a carbohydrate?",
+            options: [
+              "Catalase (C₆H₁₂O₆), which ends in -ase and has a 1:2:1 ratio",
+              "Glucose (C₆H₁₂O₆), which ends in -ose and has a 1:2:1 ratio",
+              "Glycerol (C₃H₈O₃), which ends in -ol and has a 1:4:1 ratio",
+              "Sucrose (C₆H₆O₆), which ends in -ose and has a 1:1:1 ratio"
+            ],
+            correct: 1,
+            explanation: "Sugars end in '-ose' and have C, H, O in a 1:2:1 ratio."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can describe the purposes and locations of chitin, starch, cellulose, and glycogen.",
+            q: "Match each of the four polysaccharides (starch, glycogen, cellulose, and chitin) to its correct location and job:",
+            options: [
+              "Starch: plant cell walls | Glycogen: insect exoskeletons | Cellulose: stores energy in animals | Chitin: stores energy in plants",
+              "Starch: stores energy in animals | Glycogen: stores energy in plants | Cellulose: fungi cell walls | Chitin: plant cell walls",
+              "Starch: stores energy in plants | Glycogen: stores energy in animals | Cellulose: plant cell walls | Chitin: fungi cell walls & insect exoskeletons",
+              "All four are used only by plants to make their leaves green"
+            ],
+            correct: 2,
+            explanation: "Starch = plants, Glycogen = animals, Cellulose = plant cell walls, Chitin = fungi/arthropod exoskeletons."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can name and identify the process that creates glucose + O₂ AND the process that breaks down glucose into CO₂, H₂O, + ATP (and their connections).",
+            q: "Which process creates glucose + O₂, which process breaks down glucose into CO₂ + H₂O + ATP, and how are they connected?",
+            options: [
+              "Cellular respiration creates glucose + O₂, and photosynthesis breaks them down into ATP",
+              "Photosynthesis creates glucose + O₂, and cellular respiration breaks them down to make CO₂ + H₂O + ATP; the products of one are the reactants of the other",
+              "Hydrolysis creates glucose + O₂, and dehydration synthesis breaks glucose down into CO₂",
+              "Both processes only happen in animals and have no connection to plants"
+            ],
+            correct: 1,
+            explanation: "Photosynthesis makes glucose + O₂; cellular respiration breaks them down for ATP."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can name and identify the two monomers that make up a lipid & explain the process that bonds them.",
+            q: "What are the two monomer building blocks that make up a lipid (triglyceride), and what process bonds them together?",
+            options: [
+              "Monosaccharides and amino acids, bonded together by hydrolysis",
+              "Glycerol and fatty acids, bonded together by dehydration synthesis",
+              "Nucleotides and phosphate groups, bonded together by dehydration synthesis",
+              "Glucose and glycogen, bonded together by cellular respiration"
+            ],
+            correct: 1,
+            explanation: "Lipids are built from 1 glycerol and 3 fatty acids via dehydration synthesis."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can look at the fatty acid picture and identify: Which picture is a saturated fatty acid? Which is probably from a plant? Which is liquid at room temperature?",
+            diagram: "fattyAcids",
+            q: "Look at the fatty acid reference box above. Which statement correctly answers the three study guide questions about the straight chain vs. the bent chain?",
+            options: [
+              "The bent chain is a saturated fatty acid from butter; the straight chain comes from a plant and is liquid at room temperature",
+              "Both chains are saturated fatty acids from plants that are solid at room temperature",
+              "The straight chain is a saturated fatty acid; the bent chain (with the C=C double bond) is unsaturated, comes from a plant, and is liquid at room temperature",
+              "The straight chain is liquid at room temperature because it has no hydrogen atoms"
+            ],
+            correct: 2,
+            explanation: "Straight chains are saturated solids; bent chains with C=C double bonds are unsaturated plant oils that stay liquid."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can explain the terms polar and nonpolar, and hydrophilic and hydrophobic as they relate to lipids.",
+            q: "Why don't lipids (like cooking oil or butter) mix with water?",
+            options: [
+              "Lipids are polar and hydrophilic ('water-loving'), so they evaporate in water",
+              "Lipids are made of amino acids that only dissolve in stomach acid",
+              "Lipids have a 1:2:1 sugar ratio that blocks water molecules",
+              "Lipids are nonpolar and hydrophobic ('water-fearing'), while water is polar"
+            ],
+            correct: 3,
+            explanation: "Lipids are nonpolar and hydrophobic."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can explain what atherosclerosis (arteriosclerosis) is and how it relates to lipids.",
+            q: "What is atherosclerosis (arteriosclerosis), and how is it related to lipids?",
+            options: [
+              "A disease where red blood cells bend into a sickle shape because of a mutated protein",
+              "A condition where saturated fats and cholesterol build up as plaque on the inside of arteries, hardening and narrowing them and blocking blood flow",
+              "The normal process of digesting plant oils into glycerol in the small intestine",
+              "A condition where a person lacks the enzyme to digest milk sugar"
+            ],
+            correct: 1,
+            explanation: "Saturated fats/cholesterol plaque buildup narrows arteries in atherosclerosis."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can name the three parts of a nucleotide & explain how the four nucleotides in the picture are similar and how they differ.",
+            diagram: "nucleotides",
+            q: "Look at the 4 nucleotides from your study guide. What are the 3 parts of every nucleotide, and how do these 4 nucleotides compare?",
+            options: [
+              "Parts: Glycerol, Fatty Acid, and Sugar; all 4 have the same nitrogen base, but differ in their phosphate group",
+              "Parts: Phosphate (P), Sugar (S), and Nitrogen base; all 4 have the same phosphate and sugar, but differ in which nitrogen base (A, T, C, or G) they have",
+              "Parts: Amino group, Carboxyl group, and R-group; all 4 are completely identical",
+              "Parts: Carbon, Hydrogen, and Oxygen; they differ only in how many fatty acid tails they have"
+            ],
+            correct: 1,
+            explanation: "Phosphate, sugar, and nitrogen base; they share P and S, differing only in base."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can explain Chargaff's Rules and their significance: Which nitrogen base always bonds with A? Which nitrogen base always bonds with C?",
+            q: "According to Chargaff's Rules for DNA, which nitrogen base always bonds with Adenine (A), and which always bonds with Cytosine (C)?",
+            options: [
+              "Adenine (A) always bonds with Cytosine (C), and Thymine (T) always bonds with Guanine (G)",
+              "Adenine (A) always bonds with Guanine (G), and Cytosine (C) always bonds with Thymine (T)",
+              "Adenine (A) always bonds with Thymine (T), and Cytosine (C) always bonds with Guanine (G)",
+              "Adenine (A) bonds with any base, as long as there is a phosphate group present"
+            ],
+            correct: 2,
+            explanation: "A pairs with T; C pairs with G."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can explain the function of nucleic acids (DNA and RNA) & explain how a gene is related to DNA.",
+            q: "What is the main function of nucleic acids (DNA and RNA), and what is a 'gene'?",
+            options: [
+              "Nucleic acids store long-term fat energy; a gene is a type of lipid found in the cell membrane",
+              "Nucleic acids store and transmit genetic information to make proteins; a gene is a specific section of DNA that codes for a protein",
+              "Nucleic acids speed up chemical reactions; a gene is the active site of an enzyme",
+              "Nucleic acids build plant cell walls; a gene is a single glucose ring"
+            ],
+            correct: 1,
+            explanation: "Nucleic acids store genetic info; a gene codes for a protein."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can know how many different types of amino acids there are & explain the difference between an amino acid, a polypeptide, and a protein.",
+            q: "How many different types of amino acids are there, and what is the difference between an amino acid, a polypeptide, and a protein?",
+            options: [
+              "There are 4 amino acids; a protein is the monomer, and an amino acid is a giant chain of polypeptides",
+              "There are 100 amino acids; all three terms mean the exact same thing as a monosaccharide",
+              "There are 20 amino acids; a polypeptide is a lipid, while a protein is a carbohydrate",
+              "There are 20 amino acids; an amino acid is a single monomer, a polypeptide is a chain of amino acids bonded together, and a protein is a polypeptide folded into a working 3D shape"
+            ],
+            correct: 3,
+            explanation: "20 amino acids (monomers) → polypeptide chain → folded 3D protein."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain what causes a person to have sickle cell disease & explain the importance of a protein's structure in relation to its function.",
+            q: "What causes sickle cell disease, and what does it teach us about a protein's structure (shape) and its function (job)?",
+            options: [
+              "Eating too much sugar causes red blood cells to swell up into a circle and burst",
+              "A mutation in DNA puts one wrong amino acid into the hemoglobin protein, changing its 3D shape so red blood cells bend into a sickle shape and cannot carry oxygen well",
+              "A person's liver stops making catalase, causing oxygen bubbles to get trapped in the blood",
+              "It shows that a protein's shape can change completely without affecting how the protein works"
+            ],
+            correct: 1,
+            explanation: "Structure determines function; one wrong amino acid alters hemoglobin shape."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the general function of enzymes, why an enzyme and substrate are comparable to a lock and key, and remember the suffix of enzymes is -ase.",
+            diagram: "enzyme",
+            q: "How do enzymes work, what suffix do their names usually end with, and why are an enzyme and its substrate compared to a 'lock and key'?",
+            options: [
+              "Enzymes slow down chemical reactions, usually end in -ose, and can fit any molecule in the cell",
+              "Enzymes speed up chemical reactions, usually end in -ase, and have a specific active site shape ('lock') that only fits one specific substrate ('key')",
+              "Enzymes are used up as food energy, end in -ine, and lock substrates inside the nucleus forever",
+              "Enzymes are lipids that melt at body temperature so any key can open the cell membrane"
+            ],
+            correct: 1,
+            explanation: "Enzymes end in '-ase' and fit substrates like a lock and key."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the function of catalase and the function of amylase.",
+            q: "What are the specific jobs of the enzymes catalase and amylase?",
+            options: [
+              "Catalase breaks down starch in the mouth; amylase breaks down hydrogen peroxide in the liver",
+              "Catalase builds DNA from nucleotides; amylase builds fat from glycerol",
+              "Catalase breaks down toxic hydrogen peroxide (H₂O₂) into water and oxygen gas; amylase (in saliva) breaks down starch into simple sugars",
+              "Both enzymes build plant cell walls out of cellulose"
+            ],
+            correct: 2,
+            explanation: "Catalase breaks down H₂O₂; amylase breaks down starch."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain what happens when proteins and enzymes are outside their normal conditions & explain the liver lab as it relates to all of the above.",
+            q: "In the Liver Lab, why did boiled liver fail to bubble when hydrogen peroxide was added?",
+            options: [
+              "Boiling turned the liver into a carbohydrate that soaked up the bubbles",
+              "The high heat denatured the catalase enzyme, changing the shape of its active site so the hydrogen peroxide substrate could no longer fit",
+              "The heat caused the hydrogen peroxide to freeze into a solid lipid",
+              "Enzymes only work when they are frozen at 0°C"
+            ],
+            correct: 1,
+            explanation: "Heat denatures enzymes, altering active site shape."
+          }
+        ]
+      },
+      {
+        id: "B",
+        title: "Test Variation B: Application, Diagrams & Lab Analysis",
+        subtitle: "20 multiple-choice questions testing every section of the study guide with fresh 9th-grade exam questions.",
+        questions: [
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain why carbon is the building block of life (and its unique bonding properties).",
+            q: "Why is the element carbon considered the 'building block of life'?",
+            options: [
+              "Because carbon has 4 valence electrons, it can form 4 strong covalent bonds with other atoms (including other carbons) to make long chains, branched chains, and rings",
+              "Because carbon only forms 1 bond, making it very easy to break apart in water",
+              "Because carbon is the only element that has no protons or neutrons",
+              "Because carbon is a liquid metal at room temperature"
+            ],
+            correct: 0,
+            explanation: "4 valence electrons allow carbon to form 4 covalent bonds in chains, branches, and rings."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can identify/describe the general shapes of all 4 organic molecules.",
+            q: "How can you tell the 4 organic molecules apart by their general shapes?",
+            options: [
+              "All 4 organic molecules look like identical straight lines of carbon atoms",
+              "Carbohydrates look like 5- or 6-sided rings; Lipids look like glycerol + long C-H chains; Nucleic acids have a nucleotide (P-S-base); Proteins fold into 3D shapes",
+              "Carbohydrates look like a double helix, while Nucleic acids look like 3 long fatty acid tails",
+              "Lipids are always single hexagon rings, while Carbohydrates are made of P, S, and N-base"
+            ],
+            correct: 1,
+            explanation: "Carbs = rings, Lipids = C-H chains, Nucleic acids = P-S-base, Proteins = 3D folded chains."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain the importance of the bonds in molecules (breaking and forming).",
+            q: "Why is breaking and forming chemical bonds in organic molecules so important for living things?",
+            options: [
+              "Breaking bonds creates brand-new carbon atoms out of nothing",
+              "Forming bonds destroys energy so the cell does not overheat",
+              "Energy is stored in chemical bonds; breaking bonds in food releases energy (for ATP), and forming new bonds builds the molecules our cells need to grow",
+              "Chemical bonds only hold water molecules together and have no role in food"
+            ],
+            correct: 2,
+            explanation: "Breaking bonds releases energy; forming bonds builds cellular structures."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain the process & importance of dehydration synthesis.",
+            q: "When a plant cell links hundreds of single glucose monomers together to build a large starch polymer, what is this process called?",
+            options: [
+              "Hydrolysis — water is added to break the glucose rings apart",
+              "Dehydration synthesis — water is removed to form new covalent bonds between the monomers",
+              "Denaturation — heat unfolds the glucose into a straight line",
+              "Arteriosclerosis — glucose clogs the plant's cell walls"
+            ],
+            correct: 1,
+            explanation: "Dehydration synthesis builds polymers by removing water."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain the process & importance of hydrolysis.",
+            q: "When your digestive system breaks large polymers down into small monomers so your cells can absorb them, what is this process called?",
+            options: [
+              "Dehydration synthesis, which removes water molecules to build polymers",
+              "Hydrolysis, which adds water molecules to break the bonds between monomers",
+              "Photosynthesis, which uses sunlight to make sugar",
+              "Chargaff's rule, which pairs A with T"
+            ],
+            correct: 1,
+            explanation: "Hydrolysis adds water to break polymers into monomers."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can explain the importance and functions of carbohydrates & name the monomer and polymer of carbohydrates.",
+            q: "What is the main function of carbohydrates in living things, and what are their monomer and polymer names?",
+            options: [
+              "Function: storing genetic code; Monomer: nucleotide; Polymer: DNA",
+              "Function: quick cellular energy and cell wall structure; Monomer: monosaccharide; Polymer: polysaccharide",
+              "Function: speeding up chemical reactions; Monomer: amino acid; Polymer: polypeptide",
+              "Function: waterproofing leaves; Monomer: glycerol; Polymer: triglyceride"
+            ],
+            correct: 1,
+            explanation: "Carbs provide quick energy; monomer is monosaccharide, polymer is polysaccharide."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can list the elements from which carbohydrates are made (calculate the ratio).",
+            q: "A sugar molecule has 5 Carbon atoms and 5 Oxygen atoms. Based on the 1:2:1 ratio of carbohydrates, how many Hydrogen atoms does it have?",
+            options: [
+              "5 Hydrogen atoms (C₅H₅O₅)",
+              "10 Hydrogen atoms (C₅H₁₀O₅)",
+              "20 Hydrogen atoms (C₅H₂₀O₅)",
+              "2 Hydrogen atoms (C₅H₂O₅)"
+            ],
+            correct: 1,
+            explanation: "1:2:1 ratio means 5 C, 10 H, 5 O."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can name and explain the process that bonds monosaccharides into polysaccharides & the process that breaks a polysaccharide into monosaccharides.",
+            q: "Which statement correctly names the process that builds polysaccharides AND the process that breaks them down?",
+            options: [
+              "Hydrolysis bonds monosaccharides into a polysaccharide; dehydration synthesis breaks a polysaccharide down",
+              "Dehydration synthesis bonds monosaccharides into a polysaccharide; hydrolysis breaks a polysaccharide down into monosaccharides",
+              "Photosynthesis breaks polysaccharides down; cellular respiration bonds monosaccharides together",
+              "Denaturation builds polysaccharides; catalysis breaks them down"
+            ],
+            correct: 1,
+            explanation: "Dehydration synthesis builds polysaccharides; hydrolysis breaks them down."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can describe the function of triglycerides, phospholipids, and cholesterol & compare and contrast their details/characteristics.",
+            q: "How do the three main types of lipids—triglycerides, phospholipids, and cholesterol—help our bodies?",
+            options: [
+              "Triglycerides carry oxygen in the blood; phospholipids store DNA in the nucleus; cholesterol digests starch",
+              "Triglycerides store long-term energy and insulate; phospholipids make up cell membranes; cholesterol keeps membranes flexible and makes hormones",
+              "All three lipids dissolve easily in water to give the cell instant energy",
+              "Triglycerides build insect shells; phospholipids build plant cell walls; cholesterol build hair"
+            ],
+            correct: 1,
+            explanation: "Triglycerides (energy/insulation), phospholipids (cell membranes), cholesterol (membrane stability/hormones)."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can compare and contrast saturated fatty acids vs. unsaturated fatty acids (using the study guide picture).",
+            diagram: "fattyAcids",
+            q: "Look at the fatty acid diagram above. Why is the unsaturated fatty acid (Picture 2) bent, and what does that bend do to it at room temperature?",
+            options: [
+              "It has only single bonds (C–C) that make it bend, turning it into a solid block of butter",
+              "It has a double bond (C=C) between carbons that makes the chain bend, keeping it liquid at room temperature (like plant oils)",
+              "It has extra hydrogen atoms that weigh down the end of the chain so it sinks in water",
+              "It is missing carbon atoms, which makes it dissolve in water like sugar"
+            ],
+            correct: 1,
+            explanation: "C=C double bond creates a bend, keeping unsaturated fats liquid at room temperature."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can name and explain the process that bonds fatty acids with glycerol & the process that breaks a lipid into fatty acids and glycerol.",
+            q: "When a cell builds a lipid from glycerol and fatty acids, it uses ________; when your body digests a lipid, it uses ________.",
+            options: [
+              "hydrolysis (adds water); dehydration synthesis (removes water)",
+              "dehydration synthesis (removes water); hydrolysis (adds water)",
+              "cellular respiration; photosynthesis",
+              "denaturation; arteriosclerosis"
+            ],
+            correct: 1,
+            explanation: "Dehydration synthesis builds lipids; hydrolysis breaks them."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can name and identify the monomer and polymer of a nucleic acid & name the process that bonds and breaks them.",
+            q: "What is the monomer of a nucleic acid, what are the polymers, and what process bonds the monomers together?",
+            options: [
+              "Monomer: amino acid | Polymers: polypeptides | Bonded together by: hydrolysis",
+              "Monomer: nucleotide | Polymers: DNA and RNA | Bonded together by: dehydration synthesis",
+              "Monomer: monosaccharide | Polymers: starch and glycogen | Bonded together by: dehydration synthesis",
+              "Monomer: fatty acid | Polymers: triglycerides | Bonded together by: denaturation"
+            ],
+            correct: 1,
+            explanation: "Nucleotides are monomers of nucleic acids (DNA/RNA), bonded by dehydration synthesis."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can explain Chargaff's Rules and their significance (A bonds with T, C bonds with G).",
+            q: "If one side of a DNA strand has the nitrogen base sequence A – T – C – G – G – A, what would the matching bases be on the other side?",
+            options: [
+              "A – T – C – G – G – A",
+              "T – A – G – C – C – T",
+              "C – G – A – T – T – C",
+              "G – C – T – A – A – G"
+            ],
+            correct: 1,
+            explanation: "A pairs with T, C pairs with G."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the importance/significance of proteins for organisms & name which foods are high in protein.",
+            q: "Why are proteins so important for living organisms, and which foods are high in protein?",
+            options: [
+              "Proteins are only used to make plant cell walls; foods high in protein include soda and hard candy",
+              "Proteins only store fat under the skin; foods high in protein include pure olive oil",
+              "Proteins build body structures, carry oxygen, fight disease, and act as enzymes; foods high in protein include meat, fish, eggs, dairy, beans, and nuts",
+              "Proteins have no job in animals; only lettuce is high in protein"
+            ],
+            correct: 2,
+            explanation: "Proteins build structures and act as enzymes; found in meat, eggs, beans, nuts."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can name and explain the process that bonds amino acids to build a polypeptide & the process that breaks a protein into many amino acids.",
+            q: "How are amino acids bonded together to build a polypeptide, and how is a protein broken back down into many amino acids?",
+            options: [
+              "Hydrolysis bonds amino acids together; dehydration synthesis breaks a protein apart",
+              "Dehydration synthesis removes water to bond amino acids into a polypeptide; hydrolysis adds water to break a protein down into amino acids",
+              "Denaturation builds polypeptides from sugar; photosynthesis breaks proteins down",
+              "Amylase builds proteins; catalase breaks proteins down"
+            ],
+            correct: 1,
+            explanation: "Dehydration synthesis builds polypeptides; hydrolysis digests them."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the general function of enzymes (How do they work?) using the study guide diagram.",
+            diagram: "enzyme",
+            q: "Look at the 4-step enzyme diagram from your study guide. What happens to the substrate and what happens to the enzyme by the end of the reaction?",
+            options: [
+              "The enzyme is broken in half and destroyed, while the substrate stays the same",
+              "The substrate enters the active site and is broken into products, while the enzyme stays unchanged and ready to work again",
+              "The substrate and enzyme melt together permanently",
+              "The active site disappears after one use"
+            ],
+            correct: 1,
+            explanation: "Enzymes convert substrates into products while remaining unchanged."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the liver lab as it relates to enzymes, substrates, active sites, and products.",
+            q: "In the Liver Lab, when you dropped fresh liver into hydrogen peroxide (H₂O₂), it bubbled. Match each part of the lab to its correct enzyme term:",
+            options: [
+              "Enzyme = Hydrogen peroxide | Substrate = Catalase | Products = Starch and Glucose",
+              "Enzyme = Catalase | Substrate = Hydrogen peroxide (H₂O₂) | Products = Water (H₂O) and Oxygen gas (O₂)",
+              "Enzyme = Amylase | Substrate = Oxygen gas | Products = Hydrogen peroxide",
+              "Enzyme = Water | Substrate = Boiled liver | Products = Carbon dioxide"
+            ],
+            correct: 1,
+            explanation: "Catalase is the enzyme, H₂O₂ is the substrate, water and O₂ are products."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain what happens when proteins and enzymes are outside their normal conditions.",
+            q: "What does the vocabulary word 'denature' mean when talking about a protein or enzyme?",
+            options: [
+              "When an enzyme works twice as fast at normal body temperature",
+              "When high heat or extreme pH causes a protein or enzyme to unfold and lose its 3D shape, so it can no longer do its job",
+              "When monomers are joined together by removing water",
+              "When a plant cell uses sunlight to build glucose"
+            ],
+            correct: 1,
+            explanation: "Denaturation is the unfolding of a protein/enzyme due to heat or extreme pH."
+          },
+          {
+            topic: "Performance Expectations (HS-LS1-6)",
+            iCan: "HS-LS1-6: Explain how carbon, hydrogen, and oxygen from sugar molecules may combine with other elements to form amino acids and/or other large carbon-based molecules.",
+            q: "Plants make glucose (C₆H₁₂O₆), which contains only C, H, and O. How can an organism use sugar atoms to build amino acids?",
+            options: [
+              "Sugar molecules automatically turn into amino acids without needing any Nitrogen",
+              "Cells break down the sugar molecules and rearrange their C, H, and O atoms together with Nitrogen (N) atoms to build amino acids",
+              "Cells turn Oxygen atoms into Phosphorus atoms by freezing the sugar",
+              "Sugar molecules can never be used to build other organic molecules"
+            ],
+            correct: 1,
+            explanation: "C, H, O from sugars combine with Nitrogen to form amino acids."
+          },
+          {
+            topic: "Performance Expectations (HS-LS1-1)",
+            iCan: "HS-LS1-1: Construct an explanation for how the structure of DNA determines the structure of proteins which carry out the essential functions of life.",
+            q: "How does the structure of DNA inside the nucleus control the traits and functions of our cells?",
+            options: [
+              "DNA turns directly into a lipid to digest food in the stomach",
+              "The order of nitrogen bases (A, T, C, G) in a DNA gene determines the order of amino acids, which determines the 3D shape and job of the protein",
+              "Proteins tell DNA which sugars to eat during photosynthesis",
+              "The shape of starch determines which nucleotides are found in butter"
+            ],
+            correct: 1,
+            explanation: "DNA base sequence → amino acid order → protein 3D shape and function."
+          }
+        ]
+      },
+      {
+        id: "C",
+        title: "Test Variation C: Essential Vocabulary (1–16) & Final Exam Prep",
+        subtitle: "20 multiple-choice questions making sure you can ace every vocabulary word and 'I can...' target on tomorrow's test.",
+        questions: [
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can explain why carbon is the building block of life & define Covalent Bond (Vocab #4).",
+            q: "What type of strong chemical bond does Carbon form when it shares its 4 valence electrons with other atoms?",
+            options: [
+              "Ionic bond",
+              "Covalent bond",
+              "Hydrogen bond",
+              "Peptide magnetic bond"
+            ],
+            correct: 1,
+            explanation: "Vocab #4: A covalent bond is formed when atoms share valence electrons."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can recall all 4 organic polymers and their corresponding monomers (Vocab #1, #2, #3).",
+            q: "What is the difference between a 'monomer' (Vocab #2) and a 'polymer' (Vocab #3)?",
+            options: [
+              "A polymer is a single small building block, while a monomer is a giant chain",
+              "A monomer is a single small building block molecule, while a polymer is a large molecule made of many monomers bonded together",
+              "Monomers are always inorganic, while polymers are always water molecules",
+              "Monomers only exist in plants, while polymers only exist in animals"
+            ],
+            correct: 1,
+            explanation: "Monomer = single unit; polymer = chain of units."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can identify sugars as having the suffix -ose & describe the purposes of starch, cellulose, chitin, and glycogen.",
+            q: "If you see a chemical bottle labeled 'maltose' and 'lactose', what kind of organic molecules are inside?",
+            options: [
+              "They are protein enzymes, because enzymes end with -ose",
+              "They are carbohydrates (sugars), because sugars end with the suffix -ose",
+              "They are saturated lipids, because fats end with -ose",
+              "They are DNA nucleotides, because nitrogen bases end with -ose"
+            ],
+            correct: 1,
+            explanation: "Sugars end with '-ose'."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can describe the purposes and locations of chitin, starch, cellulose, and glycogen.",
+            q: "Where does the human body store extra glucose for short-term energy after a carb-rich meal, and what is that polysaccharide called?",
+            options: [
+              "It is stored as starch in plant roots",
+              "It is stored as glycogen in the liver and muscles",
+              "It is stored as cellulose in human cell walls",
+              "It is stored as chitin on the outside of the skin"
+            ],
+            correct: 1,
+            explanation: "Glycogen is short-term animal energy storage in liver and muscles."
+          },
+          {
+            topic: "Carbohydrates",
+            iCan: "I can name and identify the process that creates glucose + O₂ and the process that breaks down glucose into CO₂, H₂O, + ATP.",
+            q: "Which equation shows the process that breaks down glucose in your cells to make ATP energy?",
+            options: [
+              "Photosynthesis: CO₂ + H₂O + Sunlight → Glucose + O₂",
+              "Cellular Respiration: Glucose + O₂ → CO₂ + H₂O + ATP",
+              "Dehydration Synthesis: Amino Acid + Amino Acid → Polypeptide + H₂O",
+              "Catalase Reaction: 2 H₂O₂ → 2 H₂O + O₂"
+            ],
+            correct: 1,
+            explanation: "Cellular respiration produces ATP from glucose and oxygen."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can name the type of molecule that lipids are & explain hydrophilic and hydrophobic.",
+            q: "Cell membranes are made of phospholipids. How do the 'heads' and 'tails' behave around water?",
+            options: [
+              "Both heads and tails are hydrophilic and dissolve completely in water",
+              "The polar heads are hydrophilic (water-loving) and face water, while the nonpolar tails are hydrophobic (water-fearing) and hide on the inside",
+              "The tails are hydrophilic and the heads are hydrophobic",
+              "Phospholipids are carbohydrates that let all molecules pass through"
+            ],
+            correct: 1,
+            explanation: "Hydrophilic heads face water; hydrophobic tails stay on the interior."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can compare and contrast saturated fatty acids vs. unsaturated fatty acids.",
+            diagram: "fattyAcids",
+            q: "Look at the fatty acid picture above. Which fatty acid is SOLID at room temperature (like butter), and why?",
+            options: [
+              "Picture 2 (bent chain), because the C=C double bond makes it freeze at room temperature",
+              "Picture 1 (straight chain), because it is saturated with only single C–C bonds, allowing straight chains to pack tightly together",
+              "Picture 2, because it comes from plants like olive oil",
+              "Neither one, because all lipids are gases at room temperature"
+            ],
+            correct: 1,
+            explanation: "Saturated straight chains pack tightly as solids at room temperature."
+          },
+          {
+            topic: "Lipids",
+            iCan: "I can define Arteriosclerosis / Atherosclerosis (Vocab #14) and how it relates to lipids.",
+            q: "Why do doctors warn people not to eat too many saturated fats and trans fats?",
+            options: [
+              "Saturated fats dissolve immediately in blood and turn into water",
+              "Excess saturated fats and cholesterol can stick to artery walls, causing atherosclerosis (arteriosclerosis) and blocking blood flow",
+              "Saturated fats mutate DNA to cause sickle cell disease",
+              "Saturated fats are enzymes that digest the stomach lining"
+            ],
+            correct: 1,
+            explanation: "Atherosclerosis is plaque buildup in arteries from saturated fats and cholesterol."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can name the three parts of a nucleotide & explain how all four nucleotides in the picture are similar and different.",
+            diagram: "nucleotides",
+            q: "Look at the 4 nucleotides in the diagram above. Can you tell which nucleotide it is by looking at the Phosphate (P) and Sugar (S)?",
+            options: [
+              "Yes, because each nucleotide has a different number of phosphate circles",
+              "No, because all 4 DNA nucleotides have the exact same phosphate group (P) and 5-carbon sugar (S); they only differ in their nitrogen base",
+              "Yes, because Adenine uses a lipid instead of sugar",
+              "No, because nucleotides do not contain phosphorus"
+            ],
+            correct: 1,
+            explanation: "Phosphate and sugar are identical in all 4 DNA nucleotides; only the nitrogen base differs."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can explain Chargaff's Rules and their significance.",
+            q: "In the nucleotide diagram on your study guide, why do A and T have matching puzzle-piece shapes, while C and G have matching curved shapes?",
+            options: [
+              "To show how an enzyme active site breaks down starch",
+              "To show Chargaff's Rules: in DNA, A always bonds with T, and C always bonds with G",
+              "To show that A, T, C, and G are amino acids",
+              "To show any base can pair with any other base"
+            ],
+            correct: 1,
+            explanation: "Visualizing base pairing: A pairs with T, C pairs with G."
+          },
+          {
+            topic: "Nucleic Acids",
+            iCan: "I can explain how a gene is related to DNA (Vocab #8 & #13).",
+            q: "Which sentence correctly uses 'Nucleic acid' (Vocab #8), 'Gene' (Vocab #13), and 'Polypeptide' (Vocab #15)?",
+            options: [
+              "A polypeptide is a segment of a lipid that contains instructions for a gene",
+              "A gene is a specific segment of a DNA nucleic acid that contains instructions for building a polypeptide (protein)",
+              "A nucleic acid is a chain of monosaccharides that breaks down genes",
+              "A gene is an enzyme that digests nucleic acids"
+            ],
+            correct: 1,
+            explanation: "A gene is a DNA section coding for a polypeptide."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the difference between an amino acid, a polypeptide, and a protein.",
+            q: "Put these three structures in order from SMALLEST to LARGEST:",
+            options: [
+              "Polypeptide → Amino acid → Functional 3D Protein",
+              "Amino acid → Polypeptide → Functional 3D Protein",
+              "Functional 3D Protein → Polypeptide → Amino acid",
+              "Nucleotide → Polypeptide → Monosaccharide"
+            ],
+            correct: 1,
+            explanation: "Amino acids link into polypeptides, which fold into 3D proteins."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the importance of a protein's structure in relation to its function & what causes sickle cell disease.",
+            q: "Why does changing just ONE amino acid in hemoglobin cause sickle cell disease?",
+            options: [
+              "Because hemoglobin is a carbohydrate that needs a 1:2:1 ratio",
+              "Because a protein's 3D structure determines its function; changing one amino acid makes hemoglobin fold into the wrong shape",
+              "Because changing one amino acid turns the protein into a saturated fat",
+              "Because red blood cells only have 1 amino acid"
+            ],
+            correct: 1,
+            explanation: "Structure determines function; one wrong amino acid changes the protein shape."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the function of amylase & remember the suffix of enzymes is -ase.",
+            q: "When you chew a cracker, which enzyme in your saliva breaks starch down into simple sugars?",
+            options: [
+              "Catalase",
+              "Amylase",
+              "Cellulose",
+              "Glycogen"
+            ],
+            correct: 1,
+            explanation: "Amylase breaks down starch in saliva."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can define Enzyme (Vocab #9) and Substrate (Vocab #16) and explain the lock-and-key model.",
+            q: "In an enzyme reaction, what is the 'substrate' (Vocab #16), and where on the enzyme does it bind?",
+            options: [
+              "The substrate is the protein catalyst itself, and it binds to the cell wall",
+              "The substrate is the specific reactant molecule that the enzyme acts on, and it binds to the enzyme's active site",
+              "The substrate is the heat energy that denatures the enzyme",
+              "The substrate is the final waste product"
+            ],
+            correct: 1,
+            explanation: "The substrate binds to the enzyme's active site."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain the liver lab as it relates to enzymes, substrates, and reusability.",
+            q: "In the Liver Lab, after bubbling stopped, a student poured MORE hydrogen peroxide onto the same piece of liver. What happened?",
+            options: [
+              "Nothing happened, because an enzyme gets destroyed after one use",
+              "It bubbled again! Because catalase is NOT used up during the reaction and can break down more H₂O₂",
+              "The liver froze solid, because catalase removes heat",
+              "The liver dissolved into glucose"
+            ],
+            correct: 1,
+            explanation: "Enzymes are catalysts that are not consumed in the reaction and can be reused."
+          },
+          {
+            topic: "Proteins",
+            iCan: "I can explain what happens when proteins and enzymes are outside their normal conditions.",
+            q: "Which two environmental changes will cause an enzyme to DENATURE?",
+            options: [
+              "Adding more substrate and keeping the enzyme at normal body temperature",
+              "Extreme high temperature (heat) and extreme pH (strong acid or base)",
+              "Giving the cell plenty of water and oxygen",
+              "Putting the enzyme in the dark"
+            ],
+            correct: 1,
+            explanation: "Extreme heat and pH cause proteins and enzymes to denature."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can compare and contrast dehydration synthesis and hydrolysis (Vocab #11 & #12).",
+            q: "Look at these two equations:\n1) Monomer + Monomer → Polymer + H₂O\n2) Polymer + H₂O → Monomer + Monomer\nWhich is which?",
+            options: [
+              "Reaction 1 is Hydrolysis; Reaction 2 is Dehydration Synthesis",
+              "Reaction 1 is Dehydration Synthesis; Reaction 2 is Hydrolysis",
+              "Reaction 1 is Cellular Respiration; Reaction 2 is Photosynthesis",
+              "Both reactions are Denaturation"
+            ],
+            correct: 1,
+            explanation: "Dehydration releases water to build polymers; hydrolysis adds water to break them."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can recall what elements make up the 4 different organic molecules & identify unknown molecules.",
+            q: "A mystery food molecule contains C, H, O, and N, is made of 20 different kinds of monomers, and denatures when boiled. What is it?",
+            options: [
+              "A carbohydrate",
+              "A protein",
+              "A lipid",
+              "A nucleic acid"
+            ],
+            correct: 1,
+            explanation: "Proteins contain C,H,O,N, amino acid monomers, and denature upon heating."
+          },
+          {
+            topic: "General Organic Molecules",
+            iCan: "I can recall all 4 categories of organic molecules, their monomers, and their main functions.",
+            q: "Which summary chart is 100% correct for tomorrow's test?",
+            options: [
+              "Carbohydrate = genetic info | Lipid = enzymes | Nucleic Acid = quick energy | Protein = waterproof wax",
+              "Carbohydrate = quick energy (monosaccharide) | Lipid = long-term energy & membranes (glycerol + fatty acids) | Nucleic Acid = genetic info (nucleotide) | Protein = enzymes & structure (amino acid)",
+              "Carbohydrate = amino acid | Lipid = nucleotide | Nucleic Acid = monosaccharide | Protein = glycerol + fatty acids",
+              "Carbohydrate = C,H,O,N,P | Lipid = C,H,O,N | Nucleic Acid = C,H,O | Protein = H₂O only"
+            ],
+            correct: 1,
+            explanation: "This table correctly matches all 4 macromolecules with their monomers and primary functions."
+          }
+        ]
+      }
+    ];
+
+    let currentTestIndex = 0;
+    let userAnswers = {};
+    let isInstantFeedback = false;
+    let isGraded = false;
+
+    function init() {
+      testsData.forEach((_, tIdx) => {
+        if (!userAnswers[tIdx]) userAnswers[tIdx] = {};
+      });
+      renderTest(currentTestIndex);
+    }
+
+    function switchTest(index) {
+      if (index === 3) {
+        document.getElementById('questions-container').innerHTML = '';
+        document.getElementById('test-controls').classList.add('hidden');
+        document.getElementById('score-banner').classList.add('hidden');
+        document.getElementById('bottom-submit-bar').classList.add('hidden');
+        document.getElementById('cheat-sheet-container').classList.remove('hidden');
+
+        for (let i = 0; i <= 3; i++) {
+          const btn = document.getElementById('tab-' + i);
+          if (i === 3) {
+            btn.className = "py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 bg-emerald-600 text-white shadow";
+          } else {
+            btn.className = "flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100";
+          }
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      document.getElementById('cheat-sheet-container').classList.add('hidden');
+      document.getElementById('test-controls').classList.remove('hidden');
+      document.getElementById('bottom-submit-bar').classList.remove('hidden');
+
+      currentTestIndex = index;
+      isGraded = false;
+      document.getElementById('score-banner').classList.add('hidden');
+
+      for (let i = 0; i <= 3; i++) {
+        const btn = document.getElementById('tab-' + i);
+        if (i === index) {
+          btn.className = "flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow";
+        } else if (i === 3) {
+          btn.className = "py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-emerald-700 hover:bg-emerald-50 border border-emerald-200";
+        } else {
+          btn.className = "flex-1 min-w-[180px] py-3 px-4 rounded-lg font-semibold text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100";
+        }
+      }
+
+      const test = testsData[index];
+      document.getElementById('current-test-title').innerText = test.title;
+      document.getElementById('current-test-subtitle').innerText = test.subtitle;
+
+      renderTest(index);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTest(tIdx) {
+      const test = testsData[tIdx];
+      const container = document.getElementById('questions-container');
+      let html = '';
+
+      test.questions.forEach((item, qIdx) => {
+        const selectedOpt = userAnswers[tIdx][qIdx];
+        const isAnswered = selectedOpt !== undefined;
+
+        let badgeColor = "bg-indigo-50 text-indigo-700 border-indigo-200";
+        if (item.topic.includes("Carb")) badgeColor = "bg-amber-50 text-amber-800 border-amber-200";
+        else if (item.topic.includes("Lipid")) badgeColor = "bg-sky-50 text-sky-800 border-sky-200";
+        else if (item.topic.includes("Nucleic")) badgeColor = "bg-teal-50 text-teal-800 border-teal-200";
+        else if (item.topic.includes("Protein") || item.topic.includes("Enzyme")) badgeColor = "bg-emerald-50 text-emerald-800 border-emerald-200";
+
+        html += `
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 md:p-6" id="q-card-${qIdx}">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border ${badgeColor}">
+                ${item.topic}
+              </span>
+              <span class="text-xs font-semibold text-slate-400">Question ${qIdx + 1} of ${test.questions.length}</span>
+            </div>
+
+            <div class="mb-3 bg-slate-50 border-l-4 border-indigo-500 px-3 py-2 rounded-r-lg">
+              <p class="text-xs font-semibold text-indigo-950 flex items-start gap-1.5">
+                <span class="text-indigo-600 shrink-0">☑ Study Guide Target:</span>
+                <span class="italic font-normal text-slate-700">"${item.iCan}"</span>
+              </p>
+            </div>
+
+            ${item.diagram ? diagramHtml[item.diagram] : ""}
+
+            <h3 class="text-base md:text-lg font-semibold text-slate-900 mb-4 leading-snug whitespace-pre-line">
+              ${qIdx + 1}. ${item.q}
+            </h3>
+
+            <div class="space-y-2.5">
+        `;
+
+        item.options.forEach((optText, optIdx) => {
+          let optionStyle = "border-slate-200 hover:border-indigo-300 hover:bg-slate-50 text-slate-700";
+          let radioIndicator = `<div class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center shrink-0"></div>`;
+
+          if (selectedOpt === optIdx) {
+            optionStyle = "border-indigo-600 bg-indigo-50/60 text-indigo-950 font-medium shadow-sm";
+            radioIndicator = `<div class="w-4 h-4 rounded-full border-4 border-indigo-600 bg-white shrink-0"></div>`;
+          }
+
+          if (isGraded || (isInstantFeedback && isAnswered)) {
+            if (optIdx === item.correct) {
+              optionStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-medium";
+              radioIndicator = `<div class="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs shrink-0">✓</div>`;
+            } else if (selectedOpt === optIdx && optIdx !== item.correct) {
+              optionStyle = "border-rose-400 bg-rose-50 text-rose-950";
+              radioIndicator = `<div class="w-4 h-4 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs shrink-0">✕</div>`;
+            }
+          }
+
+          html += `
+            <label onclick="selectOption(${tIdx}, ${qIdx}, ${optIdx})" class="option-card flex items-start gap-3 p-3.5 rounded-lg border cursor-pointer select-none ${optionStyle}">
+              <div class="mt-0.5">${radioIndicator}</div>
+              <span class="text-sm leading-relaxed">${optText}</span>
+            </label>
+          `;
+        });
+
+        html += `</div>`;
+
+        const showExplanation = (isInstantFeedback && isAnswered) || isGraded;
+        if (showExplanation) {
+          const isCorrectUser = selectedOpt === item.correct;
+          const expBg = isCorrectUser ? "bg-emerald-50/80 border-emerald-200 text-emerald-900" : "bg-amber-50/80 border-amber-200 text-amber-900";
+          html += `
+            <div class="mt-4 p-3.5 rounded-lg border text-xs sm:text-sm ${expBg}">
+              <span class="font-bold block mb-1">
+                ${isCorrectUser ? "✓ Correct!" : selectedOpt === undefined ? "— Unanswered (Correct Answer Shown):" : "✕ Incorrect."}
+              </span>
+              <p class="leading-relaxed">${item.explanation}</p>
+            </div>
+          `;
+        }
+
+        html += `</div>`;
+      });
+
+      container.innerHTML = html;
+      updateProgressCount();
+    }
+
+    function selectOption(tIdx, qIdx, optIdx) {
+      userAnswers[tIdx][qIdx] = optIdx;
+      renderTest(tIdx);
+    }
+
+    function toggleInstantFeedback() {
+      isInstantFeedback = document.getElementById('instant-feedback-toggle').checked;
+      renderTest(currentTestIndex);
+    }
+
+    function updateProgressCount() {
+      const answeredCount = Object.keys(userAnswers[currentTestIndex]).length;
+      const totalCount = testsData[currentTestIndex].questions.length;
+      document.getElementById('progress-text').innerText = answeredCount + ' of ' + totalCount + ' questions answered';
+    }
+
+    function gradeCurrentTest() {
+      isGraded = true;
+      renderTest(currentTestIndex);
+
+      const test = testsData[currentTestIndex];
+      let score = 0;
+      test.questions.forEach((item, qIdx) => {
+        if (userAnswers[currentTestIndex][qIdx] === item.correct) {
+          score++;
+        }
+      });
+
+      const total = test.questions.length;
+      const pct = Math.round((score / total) * 100);
+
+      const banner = document.getElementById('score-banner');
+      const heading = document.getElementById('score-heading');
+      const message = document.getElementById('score-message');
+      const percentage = document.getElementById('score-percentage');
+      const fraction = document.getElementById('score-fraction');
+
+      banner.classList.remove('hidden');
+      percentage.innerText = pct + '%';
+      fraction.innerText = score + ' / ' + total + ' Correct';
+
+      if (pct >= 90) {
+        banner.className = "rounded-xl p-5 mb-6 border bg-emerald-50 border-emerald-300 text-emerald-900 shadow-sm";
+        heading.innerText = "🎉 Fantastic Job, Jeff! You're Ready to Ace This Test!";
+        message.innerText = "You have mastered this variation. Review any explanations for missed questions to lock in a 100% tomorrow!";
+      } else if (pct >= 75) {
+        banner.className = "rounded-xl p-5 mb-6 border bg-indigo-50 border-indigo-300 text-indigo-900 shadow-sm";
+        heading.innerText = "👍 Solid Work! You're Passing!";
+        message.innerText = "You know the core concepts well. Check over the questions you missed and review the Cheat-Sheet tab for a quick refresher.";
+      } else {
+        banner.className = "rounded-xl p-5 mb-6 border bg-amber-50 border-amber-300 text-amber-900 shadow-sm";
+        heading.innerText = "📚 Keep Studying — Let's Review the Cheat Sheet!";
+        message.innerText = "Review the 'Quick Study Cheat-Sheet' tab at the top to brush up on your study guide targets before retaking this test.";
+      }
+
+      window.scrollTo({ top: banner.offsetTop - 20, behavior: 'smooth' });
+    }
+
+    function resetCurrentTest() {
+      userAnswers[currentTestIndex] = {};
+      isGraded = false;
+      document.getElementById('score-banner').classList.add('hidden');
+      renderTest(currentTestIndex);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onload = function() {
+      init();
+    };
+  </script>
+</body>
+</html>
